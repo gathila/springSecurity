@@ -38,44 +38,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //using http basic
         // to white list a given url, use ant matcher
 
-        http
-                //.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                //.and()
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/", "/index", "/css/*", "/js/*").permitAll()
-                .antMatchers("/api/**").hasRole(STUDENT.name())
-                //.antMatchers(HttpMethod.POST, "/management/api/**").hasAuthority(STUDENT_WRITE.getPermission())
-                //.antMatchers(HttpMethod.PUT, "/management/api/**").hasAuthority(STUDENT_WRITE.getPermission())
-                //.antMatchers(HttpMethod.DELETE, "/management/api/**").hasAuthority(STUDENT_WRITE.getPermission())
-                //.antMatchers(HttpMethod.GET, "/management/api/**").hasAuthority(STUDENT_WRITE.name())
-                .anyRequest()
-                .authenticated()
-                .and()
-                .httpBasic();
+
     }
 
     @Override
     @Bean
     protected UserDetailsService userDetailsService() {
-        UserDetails gathilaUser = User.builder()
-                .username("gathila")
-                .password(passwordEncoder.encode("password"))
-                .authorities(ADMIN.grantedAuthorities())
-                .build();
 
-        UserDetails sureshUser = User.builder()
-                .username("suresh")
-                .password(passwordEncoder.encode("password"))
-                .authorities(STUDENT.grantedAuthorities())
-                .build();
 
-        UserDetails darshanaUser = User.builder()
-                .username("darshana")
-                .password(passwordEncoder.encode("password"))
-                .authorities(ADMIN_TRAINEE.grantedAuthorities())
-                .build();
-
-        return new InMemoryUserDetailsManager(gathilaUser, sureshUser, darshanaUser);
+        return null;
     }
 }
